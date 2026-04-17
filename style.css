@@ -1,7 +1,8 @@
 :root{
-    --accent: #1D9E75;
     --primary:hsl(0, 0%, 15%);
-    --secondary:hsl(0, 0%, 30%);
+    --secondary:hsl(0, 0%, 5%);
+    --accent: #1D9E75;
+    --outline:hsl(0, 0%, 30%);
 }
 
 body{
@@ -15,21 +16,30 @@ body{
 a{
     text-decoration: none;
     color: white;
+    padding: 1em;
 }
 
 .navbar{
-    width: calc(100% - 3em);
+    width: calc(100% - 1em);
     height: 2em;
     display: flex;
     flex-direction: row;
-    gap: 1em;
     font-family: century gothic;
     color: white;
-    padding: 1em;
     font-size: 1.1em;
-    border-bottom: 2px solid var(--secondary);
+    border-bottom: 2px solid var(--outline);
     align-items: center;
-    margin: 0.5em
+    margin: 0.5em;
+    background-color: var(--primary);
+}
+
+.icon{
+    aspect-ratio: 1/1;
+    height: 2em;
+}
+
+.navlink:hover{
+    background-color: var(--outline);
 }
 
 .banner{
@@ -38,4 +48,30 @@ a{
     background-image: url(Assets/zzz.png);
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.section{
+    margin: 1em 0 0 0;
+    border-top: 2px solid var(--outline);
+    padding: 1em;
+    color: white;
+
+}
+
+.dark{
+    background-color: var(--secondary);
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+}
+
+.blocks{
+    outline: 2px solid var(--outline);
+    background-color: var(--primary);
+    padding: 4em;
+    font: 2em;
+    border-radius: 1em;
 }
