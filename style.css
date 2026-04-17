@@ -20,17 +20,45 @@ a{
 }
 
 .navbar{
-    width: calc(100% - 1em);
+    width: calc(100% - 3em);
     height: 2em;
     display: flex;
-    flex-direction: row;
+    justify-content: space-between;
     font-family: century gothic;
     color: white;
     font-size: 1.1em;
     border-bottom: 2px solid var(--outline);
     align-items: center;
-    margin: 0.5em;
+    margin: 0.5em 1em 0.5em 1em;
     background-color: var(--primary);
+}
+
+.clientHead{
+    width: calc(100% - 3em);
+    height: 5em;
+    display: flex;
+    flex-direction: column;
+    font-family: century gothic;
+    color: white;
+    font-size: 1.1em;
+    border-bottom: 2px solid var(--outline);
+    align-items: left;
+    margin: 0.5em 1em 0.5em 1em;
+    background-color: var(--primary);
+    gap: 1em;
+}
+
+.clientdata{
+    padding: 0;
+    margin: 0;
+}
+
+.navisland{
+    display: flex;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
 }
 
 .icon{
@@ -68,10 +96,42 @@ a{
     gap: 1em;
 }
 
+.grid-row{
+    display: grid;
+    grid-template-columns: repeat(4, 20em);
+    gap: 1em;
+}
+
 .blocks{
     outline: 2px solid var(--outline);
     background-color: var(--primary);
     padding: 4em;
     font: 2em;
     border-radius: 1em;
+    font-family: century gothic;
 }
+
+.catalogueBlocks{
+    outline: 2px solid var(--outline);
+    background-color: var(--primary);
+    padding: 2em;
+    font: 2em;
+    border-radius: 1em;
+    font-family: century gothic;
+}
+
+.catalogue{
+    overflow: hidden;
+}
+
+.shopItemPic{
+    aspect-ratio: 1/1;
+    height: auto;
+    width: 100%;
+    border-radius: 1em;
+}
+
+.shopItem{
+    font-weight: bolder;
+}
+
