@@ -1,0 +1,41 @@
+:root{
+    --accent: #1D9E75;
+    --primary:hsl(0, 0%, 15%);
+    --secondary:hsl(0, 0%, 30%);
+}
+
+body{
+    background-color: var(--primary);
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
+
+.navbar{
+    width: calc(100% - 3em);
+    height: 2em;
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    font-family: century gothic;
+    color: white;
+    padding: 1em;
+    font-size: 1.1em;
+    border-bottom: 2px solid var(--secondary);
+    align-items: center;
+    margin: 0.5em
+}
+
+.banner{
+    height: calc(100vh - 6em);
+    width: 100%;
+    background-image: url(Assets/zzz.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
