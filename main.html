@@ -1,38 +1,146 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Waroeng Digital</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="script" href="script.js">
-    <link rel="icon" href="Assets/Bisma.ico">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Waroeng Digital — Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="navbar">
-        <div class="navisland">
-            <a href="#"><img src="Assets/Bisma.png" alt="" class="icon"></a>
-            <a href="" class="navlink">Home</a>
-            <a href="" class="navlink">Fitur</a>
-            <a href="" class="navlink">Bisma</a>
-            <a href="" class="navlink">Chongky</a>
+<body class="page-dashboard">
+
+  <!-- Animated background -->
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+
+  <!-- ══ NAVBAR ══ -->
+  <nav class="navbar glass-nav">
+    <div class="nav-left">
+      <span class="nav-logo-icon">🏪</span>
+      <div>
+        <span class="nav-brand">Waroeng Digital</span>
+        <span class="nav-sub" id="dash-nama-toko">Memuat...</span>
+      </div>
+    </div>
+    <div class="nav-center">
+      <a href="main.html" class="nav-link nav-active">📊 Dashboard</a>
+      <a href="clientShop.html" class="nav-link">🛍 Kasir</a>
+    </div>
+    <div class="nav-right">
+      <div class="nav-user-chip">
+        <span class="nav-user-dot"></span>
+        <span id="nav-user">...</span>
+      </div>
+      <button id="btn-logout" class="btn-nav-logout">Keluar</button>
+    </div>
+  </nav>
+
+  <!-- ══ MAIN CONTENT ══ -->
+  <main class="dash-main">
+
+    <!-- ── SECTION: Hero greeting ── -->
+    <div class="dash-hero">
+      <div>
+        <h1 class="dash-title">Selamat Datang! 👋</h1>
+        <p class="dash-subtitle">Pantau semua aktivitas warungmu hari ini.</p>
+      </div>
+      <div class="hero-badge">
+        <span>📅</span>
+        <span id="dash-tanggal"></span>
+      </div>
+    </div>
+
+    <!-- ── SECTION: Financial Summary ── -->
+    <section class="dash-section">
+      <div class="section-label">💰 Ringkasan Keuangan</div>
+      <div class="keu-grid">
+
+        <div class="keu-card keu-main dash-card">
+          <div class="keu-icon">🏦</div>
+          <div>
+            <p class="keu-label">Total Dana Toko</p>
+            <p class="keu-val" id="val-dana">Rp 0</p>
+            <p class="keu-sub">Saldo aktif sekarang</p>
+          </div>
+          <div class="keu-glow"></div>
         </div>
-        <div class="navisland">
-            <a href="login.html" class="navlink">Sign up</a>
-            <a href="clientShop.html" class="navlink">Log in</a>
+
+        <div class="keu-card dash-card">
+          <div class="keu-icon">📈</div>
+          <div>
+            <p class="keu-label">Omzet Bulan Ini</p>
+            <p class="keu-val" id="val-omzet">Rp 0</p>
+            <div class="omzet-bar-wrap">
+              <div class="omzet-bar-track"><div class="omzet-bar-fill" id="omzet-bar"></div></div>
+              <small id="omzet-pct" class="text-muted">0%</small>
+            </div>
+          </div>
         </div>
-    </div>
-    <div class="banner"></div>
-    <div class="section dark grid">
-        <div class="blocks">Jemes</div>
-        <div class="blocks">Jomo</div>
-        <div class="blocks">k</div>
-    </div>
-    <div class="section">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus, natus consequuntur? Distinctio nam ab deleniti omnis, tenetur ullam enim eaque inventore dolorum sapiente vitae, ipsa blanditiis mollitia! Consequatur cumque perferendis iusto. Veniam doloribus quia expedita odio quisquam voluptatibus veritatis ad asperiores ratione enim animi similique dignissimos iste a, quam at.
-    </div>
-    <div class="section dark">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus, natus consequuntur? Distinctio nam ab deleniti omnis, tenetur ullam enim eaque inventore dolorum sapiente vitae, ipsa blanditiis mollitia! Consequatur cumque perferendis iusto. Veniam doloribus quia expedita odio quisquam voluptatibus veritatis ad asperiores ratione enim animi similique dignissimos iste a, quam at.
-    </div>
+
+        <div class="keu-card dash-card">
+          <div class="keu-icon">🧾</div>
+          <div>
+            <p class="keu-label">Total Transaksi</p>
+            <p class="keu-val" id="val-transaksi">0</p>
+            <p class="keu-sub">Transaksi bulan ini</p>
+          </div>
+        </div>
+
+        <div class="keu-card keu-warn dash-card">
+          <div class="keu-icon">📋</div>
+          <div>
+            <p class="keu-label">Kasbon Aktif</p>
+            <p class="keu-val" id="val-kasbon">Rp 0</p>
+            <p class="keu-sub">Hutang belum lunas</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── SECTION: Grafik Omzet + Stok Alert (2-col) ── -->
+    <section class="dash-section dash-two-col">
+
+      <!-- Grafik mini -->
+      <div class="dash-panel dash-card">
+        <div class="panel-header">
+          <span class="panel-title">📊 Omzet 7 Hari Terakhir</span>
+          <span class="panel-badge">Minggu ini</span>
+        </div>
+        <div id="grafik-container" class="grafik-wrap"></div>
+      </div>
+
+      <!-- Peringatan stok -->
+      <div class="dash-panel dash-card">
+        <div class="panel-header">
+          <span class="panel-title">⚠ Peringatan Stok</span>
+          <span class="panel-badge badge-red" id="stok-badge">0</span>
+        </div>
+        <div id="stok-alert-list" class="stok-list"></div>
+      </div>
+
+    </section>
+
+    <!-- ── SECTION: Kasbon + Credit Score ── -->
+    <section class="dash-section">
+      <div class="section-label">📋 Daftar Kasbon Aktif <span class="section-sub-note">· Fitur WhatsApp Debt Reminder</span></div>
+      <div id="kasbon-list" class="kasbon-list"></div>
+    </section>
+
+  </main><!-- /dash-main -->
+
+  <!-- Toast container auto-created by JS -->
+
+<script src="script.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    initDashboard();
+    // Tanggal hari ini
+    const opts = { weekday:'long', year:'numeric', month:'long', day:'numeric' };
+    document.getElementById('dash-tanggal').textContent = new Date().toLocaleDateString('id-ID', opts);
+});
+</script>
 </body>
 </html>

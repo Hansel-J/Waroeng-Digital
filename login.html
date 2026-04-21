@@ -1,14 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="script" href="script.js">
-    <link rel="icon" href="Assets/Bisma.ico">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Waroeng Digital — Masuk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
-<body>
-    
+<body class="page-login">
+
+  <!-- ══ ANIMATED BACKGROUND ORBS (pure CSS) ══ -->
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+
+  <div class="login-wrap">
+
+    <!-- ══ BRAND PANEL ══ -->
+    <div class="login-brand">
+      <div class="brand-logo">🏪</div>
+      <h1 class="brand-name">Waroeng<br><span>Digital</span></h1>
+      <p class="brand-tagline">Warungmu lebih rapi,<br>penghasilanmu lebih jelas.</p>
+      <div class="brand-pills">
+        <span class="pill">📦 Manajemen Stok</span>
+        <span class="pill">💰 Kasir Digital</span>
+        <span class="pill">📱 Tagih via WA</span>
+        <span class="pill">📊 Credit Score</span>
+      </div>
+    </div>
+
+    <!-- ══ LOGIN CARD ══ -->
+    <div class="login-card">
+      <div class="login-card-inner">
+
+        <div class="login-header">
+          <h2>Selamat Datang 👋</h2>
+          <p>Masuk ke akun Waroeng Digital Anda</p>
+        </div>
+
+        <form id="login-form" autocomplete="off">
+
+          <div class="form-group">
+            <label for="input-user">Username</label>
+            <div class="input-wrap">
+              <span class="input-icon">👤</span>
+              <input type="text" id="input-user" placeholder="owner atau kasir" required spellcheck="false">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="input-pass">Password</label>
+            <div class="input-wrap">
+              <span class="input-icon">🔒</span>
+              <input type="password" id="input-pass" placeholder="Masukkan password" required>
+              <button type="button" id="toggle-pass" class="toggle-pass" tabindex="-1">👁</button>
+            </div>
+          </div>
+
+          <!-- Pesan error login -->
+          <div class="login-error" id="login-error">
+            ❌ Username atau password salah. Coba lagi.
+          </div>
+
+          <button type="submit" id="btn-login" class="btn-login">
+            <span class="btn-text">Masuk ke Dashboard</span>
+            <span class="btn-loader"></span>
+          </button>
+
+        </form>
+
+        <!-- Demo shortcuts -->
+        <div class="demo-section">
+          <p class="demo-label">Demo cepat — klik untuk mengisi:</p>
+          <div class="demo-btns">
+            <button id="demo-owner" class="demo-btn demo-owner">
+              👑 Login sebagai Owner
+              <small>Akses dashboard & laporan</small>
+            </button>
+            <button id="demo-kasir" class="demo-btn demo-kasir">
+              🛍 Login sebagai Kasir
+              <small>Akses tampilan POS</small>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /login-wrap -->
+
+<script src="script.js"></script>
+<script>document.addEventListener('DOMContentLoaded', initLogin);</script>
 </body>
 </html>

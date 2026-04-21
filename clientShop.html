@@ -1,52 +1,103 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop name</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="script" href="script.js">
-    <link rel="icon" href="Assets/Bisma.ico">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Waroeng Digital — Kasir</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="clientHead">
-        <h1 class="clientdata">Shop name</h1>
-        <p class="clientdata">Funds: IDR Rp. 000.000.000</p>
+<body class="page-kasir">
+
+  <!-- ══ KASIR HEADER ══ -->
+  <header class="kasir-header glass-nav">
+    <div class="kasir-header-left">
+      <a href="main.html" class="btn-back">←</a>
+      <div>
+        <p class="kasir-toko-name" id="kasir-toko">Memuat...</p>
+        <p class="kasir-saldo-lbl">Saldo: <span class="kasir-saldo-val" id="kasir-saldo">Rp 0</span></p>
+      </div>
     </div>
-    <div class="section catalogue dark">
-        <h1>Catalogue</h1>
-        <div class="grid-row">
-            <div class="catalogueBlocks">
-                <img src="Assets/Bisma.png" alt="" class="shopItemPic">
-                <p class="shopItem">Bisma</p>
-                <p class="shopItemDesc">Lorem ipsum dolor sit amet.</p>
-                <p class="shopItemStock">Stock: n</p>
-            </div>
-            <div class="catalogueBlocks">
-                <img src="Assets/Bisma.png" alt="" class="shopItemPic">
-                <p class="shopItem">Bisma</p>
-                <p class="shopItemDesc">Lorem ipsum dolor sit amet.</p>
-                <p class="shopItemStock">Stock: n</p>
-            </div>
-            <div class="catalogueBlocks">
-                <img src="Assets/Bisma.png" alt="" class="shopItemPic">
-                <p class="shopItem">Bisma</p>
-                <p class="shopItemDesc">Lorem ipsum dolor sit amet.</p>
-                <p class="shopItemStock">Stock: n</p>
-            </div>
-            <div class="catalogueBlocks">
-                <img src="Assets/Bisma.png" alt="" class="shopItemPic">
-                <p class="shopItem">Bisma</p>
-                <p class="shopItemDesc">Lorem ipsum dolor sit amet.</p>
-                <p class="shopItemStock">Stock: n</p>
-            </div>
+    <div class="kasir-header-right">
+      <span class="kasir-mode-badge">🛍 Mode Kasir</span>
+      <div class="kasir-user-info">
+        <small id="kasir-user" class="text-muted">...</small>
+        <button id="btn-logout-kasir" class="btn-nav-logout">Keluar</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══ FILTER KATEGORI ══ -->
+  <div class="filter-bar">
+    <div id="filter-wrap" class="filter-wrap">
+      <!-- Di-render oleh renderFilter() di script.js -->
+    </div>
+  </div>
+
+  <!-- ══ GRID PRODUK ══ -->
+  <div class="produk-section">
+    <div id="produk-grid" class="produk-grid">
+      <!-- Di-render oleh renderProduk() di script.js -->
+      <div class="loading-placeholder">Memuat produk...</div>
+    </div>
+  </div>
+
+  <!-- ══ CART BAR (sticky bottom) ══ -->
+  <div class="cart-bar" id="cart-bar">
+    <div class="cart-bar-info">
+      <span class="cart-icon">🛒</span>
+      <div>
+        <span class="cart-count" id="cart-count">0 item</span>
+        <span class="cart-total" id="cart-total">Rp 0</span>
+      </div>
+    </div>
+    <button class="btn-checkout" id="btn-buka-checkout">
+      Bayar Sekarang →
+    </button>
+  </div>
+
+  <!-- ══ MODAL CHECKOUT (overlay) ══ -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal-sheet">
+
+      <div class="modal-handle"></div>
+
+      <div class="modal-header">
+        <h3>🧾 Ringkasan Belanja</h3>
+        <button class="modal-close" id="btn-tutup-modal">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div id="modal-item-list" class="modal-item-list">
+          <!-- Di-render oleh bukaCheckout() -->
         </div>
+
+        <div class="modal-divider"></div>
+
+        <div class="modal-total-row">
+          <span>Total Pembayaran</span>
+          <span class="modal-total-val" id="modal-total">Rp 0</span>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button id="btn-bayar-tunai" class="btn-bayar-tunai">
+          💵 Bayar Tunai
+        </button>
+        <button id="btn-bayar-kasbon" class="btn-bayar-kasbon">
+          📝 Kasbon
+        </button>
+        <button class="btn-bayar-qris" disabled title="Segera hadir!">
+          📱 QRIS <small>(Soon)</small>
+        </button>
+      </div>
+
     </div>
-    <div class="section">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus, natus consequuntur? Distinctio nam ab deleniti omnis, tenetur ullam enim eaque inventore dolorum sapiente vitae, ipsa blanditiis mollitia! Consequatur cumque perferendis iusto. Veniam doloribus quia expedita odio quisquam voluptatibus veritatis ad asperiores ratione enim animi similique dignissimos iste a, quam at.
-    </div>
-    <div class="section dark">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus, natus consequuntur? Distinctio nam ab deleniti omnis, tenetur ullam enim eaque inventore dolorum sapiente vitae, ipsa blanditiis mollitia! Consequatur cumque perferendis iusto. Veniam doloribus quia expedita odio quisquam voluptatibus veritatis ad asperiores ratione enim animi similique dignissimos iste a, quam at.
-    </div>
+  </div><!-- /modal-overlay -->
+
+<script src="script.js"></script>
+<script>document.addEventListener('DOMContentLoaded', initKasir);</script>
 </body>
 </html>
