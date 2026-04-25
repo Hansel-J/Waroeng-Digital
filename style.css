@@ -975,3 +975,354 @@ nav, main, header, .login-wrap, .filter-bar, .produk-section,
     .dash-hero { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
     .kasbon-footer { flex-direction: column; align-items: flex-start; }
 }
+
+/* ═══════════════════════════════════════════════
+   13. INVENTORY MANAGEMENT (v3.0 NEW)
+   ═══════════════════════════════════════════════ */
+
+/* ── Tab navigation di navbar ── */
+.dash-tab {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    padding: 0.4rem 0.85rem;
+    border-radius: var(--r-full);
+    font-size: 0.85rem; font-weight: 600;
+    cursor: pointer;
+    transition: all var(--t-base);
+    font-family: var(--font);
+}
+.dash-tab:hover { color: var(--text-base); background: var(--glass-bg); }
+.dash-tab.tab-aktif { color: var(--accent) !important; background: var(--accent-dim) !important; }
+
+.tab-panel { display: none; flex-direction: column; gap: 2rem; }
+.tab-panel.panel-aktif { display: flex; }
+
+/* ── Inventory header ── */
+.inv-header {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 0.75rem;
+}
+.btn-tambah-produk {
+    padding: 0.55rem 1.2rem;
+    background: var(--accent); color: white;
+    border: none; border-radius: var(--r-md);
+    font-size: 0.85rem; font-weight: 700;
+    transition: all var(--t-base); cursor: pointer;
+    font-family: var(--font);
+}
+.btn-tambah-produk:hover  { filter: brightness(1.1); transform: translateY(-1px); box-shadow: var(--shadow-accent); }
+.btn-tambah-produk:active { transform: scale(0.97); }
+
+/* ── Inventory Table ── */
+.inv-table-wrap { overflow-x: auto; }
+.inv-table {
+    width: 100%; border-collapse: collapse;
+    font-size: 0.85rem;
+}
+.inv-table th {
+    padding: 0.7rem 1rem; text-align: left;
+    font-size: 0.72rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.05em;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--glass-border);
+    white-space: nowrap;
+}
+.inv-table td {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    vertical-align: middle;
+}
+.inv-table tr:last-child td { border-bottom: none; }
+.inv-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+.inv-produk-cell { display: flex; align-items: center; gap: 0.65rem; }
+.inv-thumb {
+    width: 38px; height: 38px;
+    border-radius: var(--r-sm);
+    object-fit: cover; flex-shrink: 0;
+    border: 1px solid var(--glass-border);
+}
+.inv-emoji { font-size: 1.8rem; line-height: 1; flex-shrink: 0; }
+.inv-nama  { font-weight: 600; font-size: 0.88rem; }
+
+.td-num { text-align: right; font-weight: 600; white-space: nowrap; }
+
+.kat-chip {
+    padding: 0.2rem 0.65rem;
+    background: var(--glass-bg); border: 1px solid var(--glass-border);
+    border-radius: var(--r-full); font-size: 0.72rem; color: var(--text-muted);
+    white-space: nowrap;
+}
+
+/* Stok inline edit */
+.stok-inline-edit {
+    display: flex; align-items: center; gap: 0.35rem;
+}
+.btn-stok-dec, .btn-stok-inc {
+    width: 24px; height: 24px;
+    border-radius: var(--r-sm);
+    background: var(--glass-bg); border: 1px solid var(--glass-border);
+    color: var(--text-muted); font-size: 1rem; font-weight: 700;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: all var(--t-fast); font-family: var(--font);
+}
+.btn-stok-dec:hover { background: var(--danger-dim); color: var(--danger); border-color: var(--danger); }
+.btn-stok-inc:hover { background: var(--accent-dim); color: var(--accent); border-color: var(--accent); }
+.btn-stok-dec:active, .btn-stok-inc:active { transform: scale(0.9); }
+
+.status-chip {
+    padding: 0.22rem 0.65rem;
+    border-radius: var(--r-full);
+    font-size: 0.72rem; font-weight: 700;
+    white-space: nowrap;
+}
+.status-aman   { background: rgba(34,197,94,0.1);  color: #4ade80; }
+.status-rendah { background: var(--warning-dim);    color: var(--warning); }
+.status-habis  { background: var(--danger-dim);     color: var(--danger); }
+
+.inv-aksi { display: flex; gap: 0.35rem; }
+.btn-edit-produk, .btn-hapus-produk {
+    width: 30px; height: 30px;
+    border-radius: var(--r-sm);
+    background: var(--glass-bg); border: 1px solid var(--glass-border);
+    cursor: pointer; font-size: 0.85rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: all var(--t-base);
+}
+.btn-edit-produk:hover  { background: var(--accent-dim); border-color: var(--accent); }
+.btn-hapus-produk:hover { background: var(--danger-dim); border-color: var(--danger); }
+.btn-edit-produk:active, .btn-hapus-produk:active { transform: scale(0.9); }
+
+/* ═══════════════════════════════════════════════
+   14. FORM PRODUK MODAL (v3.0 NEW)
+   ═══════════════════════════════════════════════ */
+.modal-sheet-lg {
+    max-width: 820px !important;
+    max-height: 92vh;
+}
+
+.form-produk-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    padding: 1.25rem 1.5rem !important;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.form-col { display: flex; flex-direction: column; gap: 0.85rem; }
+
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+.form-group label {
+    font-size: 0.78rem; font-weight: 700;
+    color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em;
+}
+.form-group input, .form-group select {
+    padding: 0.65rem 0.85rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--outline);
+    border-radius: var(--r-md);
+    color: var(--text-base); font-size: 0.88rem;
+    transition: border-color var(--t-base), box-shadow var(--t-base);
+    font-family: var(--font);
+}
+.form-group input:focus, .form-group select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-dim);
+}
+.form-group input::placeholder { color: var(--text-faint); }
+
+.form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+
+.form-label-block {
+    font-size: 0.78rem; font-weight: 700;
+    color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em;
+    display: block; margin-bottom: 0.4rem;
+}
+
+/* Margin preview text */
+.margin-preview-text {
+    font-size: 0.8rem; font-weight: 600;
+    padding: 0.4rem 0.75rem;
+    background: var(--glass-bg); border-radius: var(--r-sm);
+    border: 1px solid var(--glass-border);
+    min-height: 32px;
+    display: flex; align-items: center;
+}
+
+/* Gambar preview */
+.gambar-preview-wrap {
+    width: 100%; aspect-ratio: 1;
+    border: 2px dashed var(--glass-border);
+    border-radius: var(--r-lg);
+    overflow: hidden; position: relative;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--glass-bg);
+    max-height: 200px;
+}
+.gambar-preview-wrap img {
+    width: 100%; height: 100%; object-fit: cover;
+}
+.gambar-placeholder {
+    display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+    color: var(--text-faint);
+}
+.gambar-placeholder span { font-size: 2rem; opacity: 0.4; }
+.gambar-placeholder p   { font-size: 0.75rem; }
+
+/* Upload actions */
+.upload-actions {
+    display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem;
+}
+.btn-upload-file, .btn-capture-cam, .btn-hapus-img {
+    flex: 1; min-width: 80px;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--r-md);
+    font-size: 0.78rem; font-weight: 600;
+    cursor: pointer; text-align: center;
+    transition: all var(--t-base);
+    font-family: var(--font);
+    display: flex; align-items: center; justify-content: center; gap: 0.3rem;
+}
+.btn-upload-file {
+    background: var(--accent-dim); border: 1px solid var(--accent-glow);
+    color: var(--accent); cursor: pointer;
+}
+.btn-upload-file:hover  { background: var(--accent); color: white; }
+.btn-capture-cam {
+    background: var(--glass-bg); border: 1px solid var(--glass-border);
+    color: var(--text-muted);
+}
+.btn-capture-cam:hover  { border-color: var(--info); color: var(--info); }
+.btn-hapus-img {
+    background: var(--danger-dim); border: 1px solid rgba(224,82,82,0.3);
+    color: var(--danger); flex: 0; padding: 0.5rem 0.65rem;
+}
+.btn-hapus-img:hover { background: var(--danger); color: white; }
+
+.btn-ambil-foto {
+    width: 100%; margin-top: 0.5rem;
+    padding: 0.65rem;
+    background: var(--accent); color: white; border: none;
+    border-radius: var(--r-md); font-weight: 700; font-size: 0.85rem;
+    cursor: pointer; transition: all var(--t-base); font-family: var(--font);
+}
+.btn-ambil-foto:hover { filter: brightness(1.1); }
+
+/* ═══════════════════════════════════════════════
+   15. DASHBOARD: LABA CARD (v3.0 NEW)
+   ═══════════════════════════════════════════════ */
+.keu-laba {
+    border-color: rgba(34,197,94,0.3);
+    background: linear-gradient(135deg, rgba(34,197,94,0.08), rgba(25,25,25,0.7));
+}
+.keu-laba .keu-val { color: #4ade80; }
+
+/* Modal laba hint */
+.modal-laba-hint {
+    font-size: 0.78rem; font-weight: 600; color: var(--accent);
+    text-align: right; margin-top: 0.3rem;
+    padding: 0.35rem 0.7rem;
+    background: var(--accent-dim); border-radius: var(--r-sm);
+}
+
+/* ── Logo gambar di navbar ── */
+.nav-logo-img {
+    width: 32px; height: 32px;
+    border-radius: var(--r-sm);
+    object-fit: contain;
+}
+
+/* ═══════════════════════════════════════════════
+   16. CUSTOMER PORTAL (v3.0 NEW)
+   ═══════════════════════════════════════════════ */
+.btn-pesan-wa {
+    display: block; width: 100%;
+    margin-top: 0.5rem; padding: 0.5rem;
+    background: rgba(37,211,102,0.12); border: 1px solid rgba(37,211,102,0.3);
+    border-radius: var(--r-md); color: #25D366;
+    font-size: 0.78rem; font-weight: 700; text-align: center;
+    transition: all var(--t-base); font-family: var(--font);
+}
+.btn-pesan-wa:hover { background: #25D366; color: white; }
+.btn-pesan-wa:active { transform: scale(0.97); }
+
+.kasbon-customer-section {
+    padding: 1rem 0 1.5rem;
+    border-top: 1px solid var(--glass-border);
+    margin-top: 0.5rem;
+}
+.kasbon-customer-card {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.85rem 1.25rem;
+    margin: 0 1.25rem 0.65rem;
+    border-radius: var(--r-md);
+    background: rgba(224,168,82,0.08); border: 1px solid rgba(224,168,82,0.2);
+}
+.kasbon-customer-card strong { font-size: 0.88rem; }
+
+/* ── Demo customer button ── */
+.demo-customer {
+    background: rgba(29,158,117,0.08);
+    border: 1px solid rgba(29,158,117,0.2);
+}
+.demo-customer:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+
+/* ── Login demo buttons 3 col ── */
+.demo-btns { display: flex; gap: 0.5rem; }
+.demo-btn  { flex: 1; }
+
+/* ═══════════════════════════════════════════════
+   17. RESPONSIVE UPDATES (v3.0)
+   ═══════════════════════════════════════════════ */
+@media (max-width: 900px) {
+    .form-produk-body { grid-template-columns: 1fr; }
+    .modal-sheet-lg   { max-width: 100% !important; }
+}
+
+@media (max-width: 768px) {
+    .inv-table th:nth-child(3),
+    .inv-table td:nth-child(3) { display: none; } /* Sembunyikan harga beli di mobile */
+    .navbar .nav-center { display: none; }
+    .form-row-2 { grid-template-columns: 1fr; }
+    .dash-tab { font-size: 0.75rem; padding: 0.35rem 0.6rem; }
+    /* Mobile: tampilkan nav tab di bawah navbar */
+    .navbar .nav-center {
+        display: none;
+    }
+}
+
+/* ── Mobile tab bar (alternatif di bawah hero) ── */
+.mobile-tabs {
+    display: none;
+    gap: 0.5rem; padding: 0 1rem;
+    flex-wrap: nowrap; overflow-x: auto;
+}
+@media (max-width: 768px) {
+    .mobile-tabs { display: flex; }
+}
+
+/* ── Produk img wrap ── */
+.produk-img-wrap {
+    display: flex; align-items: center;
+}
+.produk-img {
+    border-radius: var(--r-sm);
+    border: 1px solid var(--glass-border);
+}
+
+/* ── Desktop: wider produk grid ── */
+@media (min-width: 1200px) {
+    .produk-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+    .keu-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+@media (min-width: 1400px) {
+    .dash-main { max-width: 1400px; }
+}

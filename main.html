@@ -12,21 +12,22 @@
 </head>
 <body class="page-dashboard">
 
-  <!-- Animated background -->
   <div class="bg-orb orb-1"></div>
   <div class="bg-orb orb-2"></div>
 
   <!-- ══ NAVBAR ══ -->
   <nav class="navbar glass-nav">
     <div class="nav-left">
-      <span class="nav-logo-icon">🏪</span>
+      <img src="Assets/Bisma.png" class="nav-logo-img" alt="Logo" onerror="this.style.display='none';this.nextSibling.style.display='block'">
+      <span class="nav-logo-icon" style="display:none">🏪</span>
       <div>
         <span class="nav-brand">Waroeng Digital</span>
         <span class="nav-sub" id="dash-nama-toko">Memuat...</span>
       </div>
     </div>
     <div class="nav-center">
-      <a href="main.html" class="nav-link nav-active">📊 Dashboard</a>
+      <button class="nav-link dash-tab tab-aktif" data-tab="ringkasan">📊 Dashboard</button>
+      <button class="nav-link dash-tab" data-tab="inventaris">📦 Inventaris</button>
       <a href="clientShop.html" class="nav-link">🛍 Kasir</a>
     </div>
     <div class="nav-right">
@@ -41,7 +42,7 @@
   <!-- ══ MAIN CONTENT ══ -->
   <main class="dash-main">
 
-    <!-- ── SECTION: Hero greeting ── -->
+    <!-- ── HERO ── -->
     <div class="dash-hero">
       <div>
         <h1 class="dash-title">Selamat Datang! 👋</h1>
@@ -53,91 +54,237 @@
       </div>
     </div>
 
-    <!-- ── SECTION: Financial Summary ── -->
-    <section class="dash-section">
-      <div class="section-label">💰 Ringkasan Keuangan</div>
-      <div class="keu-grid">
+    <!-- ══════════════════════════════════════════ -->
+    <!-- TAB PANEL 1: RINGKASAN (Dashboard)        -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="tab-panel panel-aktif" id="tab-ringkasan">
 
-        <div class="keu-card keu-main dash-card">
-          <div class="keu-icon">🏦</div>
-          <div>
-            <p class="keu-label">Total Dana Toko</p>
-            <p class="keu-val" id="val-dana">Rp 0</p>
-            <p class="keu-sub">Saldo aktif sekarang</p>
+      <!-- Keuangan Grid (v3: + Laba Bersih) -->
+      <section class="dash-section">
+        <div class="section-label">💰 Ringkasan Keuangan Bulan Ini</div>
+        <div class="keu-grid">
+
+          <div class="keu-card keu-main dash-card">
+            <div class="keu-icon">🏦</div>
+            <div>
+              <p class="keu-label">Total Dana Toko</p>
+              <p class="keu-val" id="val-dana">Rp 0</p>
+              <p class="keu-sub">Saldo aktif sekarang</p>
+            </div>
+            <div class="keu-glow"></div>
           </div>
-          <div class="keu-glow"></div>
-        </div>
 
-        <div class="keu-card dash-card">
-          <div class="keu-icon">📈</div>
-          <div>
-            <p class="keu-label">Omzet Bulan Ini</p>
-            <p class="keu-val" id="val-omzet">Rp 0</p>
-            <div class="omzet-bar-wrap">
-              <div class="omzet-bar-track"><div class="omzet-bar-fill" id="omzet-bar"></div></div>
-              <small id="omzet-pct" class="text-muted">0%</small>
+          <div class="keu-card dash-card">
+            <div class="keu-icon">📈</div>
+            <div>
+              <p class="keu-label">Omzet Bulan Ini</p>
+              <p class="keu-val" id="val-omzet">Rp 0</p>
+              <div class="omzet-bar-wrap">
+                <div class="omzet-bar-track"><div class="omzet-bar-fill" id="omzet-bar"></div></div>
+                <small id="omzet-pct" class="text-muted">0%</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- BARU: Laba Bersih -->
+          <div class="keu-card keu-laba dash-card">
+            <div class="keu-icon">💹</div>
+            <div>
+              <p class="keu-label">Laba Bersih</p>
+              <p class="keu-val" id="val-laba">Rp 0</p>
+              <p class="keu-sub">Omzet − HPP (modal)</p>
+            </div>
+          </div>
+
+          <div class="keu-card dash-card">
+            <div class="keu-icon">🧾</div>
+            <div>
+              <p class="keu-label">Total Transaksi</p>
+              <p class="keu-val" id="val-transaksi">0</p>
+              <p class="keu-sub">Transaksi bulan ini</p>
+            </div>
+          </div>
+
+          <div class="keu-card keu-warn dash-card">
+            <div class="keu-icon">📋</div>
+            <div>
+              <p class="keu-label">Kasbon Aktif</p>
+              <p class="keu-val" id="val-kasbon">Rp 0</p>
+              <p class="keu-sub">Hutang belum lunas</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Grafik + Stok Alert -->
+      <section class="dash-section dash-two-col">
+        <div class="dash-panel dash-card">
+          <div class="panel-header">
+            <span class="panel-title">📊 Omzet 7 Hari Terakhir</span>
+            <span class="panel-badge">Minggu ini</span>
+          </div>
+          <div id="grafik-container" class="grafik-wrap"></div>
+        </div>
+        <div class="dash-panel dash-card">
+          <div class="panel-header">
+            <span class="panel-title">⚠ Peringatan Stok</span>
+            <span class="panel-badge badge-red" id="stok-badge">0</span>
+          </div>
+          <div id="stok-alert-list" class="stok-list"></div>
+        </div>
+      </section>
+
+      <!-- Kasbon -->
+      <section class="dash-section">
+        <div class="section-label">📋 Daftar Kasbon Aktif <span class="section-sub-note">· Fitur WhatsApp Debt Reminder</span></div>
+        <div id="kasbon-list" class="kasbon-list"></div>
+      </section>
+
+    </div><!-- /tab-ringkasan -->
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- TAB PANEL 2: INVENTARIS (Admin)           -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="tab-panel" id="tab-inventaris">
+
+      <section class="dash-section">
+        <div class="inv-header">
+          <div class="section-label">📦 Manajemen Inventaris Produk</div>
+          <button class="btn-tambah-produk" onclick="bukaFormTambah()">
+            ➕ Tambah Produk
+          </button>
+        </div>
+        <div id="inv-list" class="dash-card" style="padding:1rem;overflow-x:auto"></div>
+      </section>
+
+    </div><!-- /tab-inventaris -->
+
+  </main>
+
+  <!-- ══ MODAL: FORM PRODUK (Add/Edit) ══ -->
+  <div class="modal-overlay" id="form-produk-overlay">
+    <div class="modal-sheet modal-sheet-lg">
+
+      <div class="modal-handle"></div>
+
+      <div class="modal-header">
+        <h3 id="form-produk-title">➕ Tambah Produk</h3>
+        <button class="modal-close" onclick="tutupFormProduk()">✕</button>
+      </div>
+
+      <div class="modal-body form-produk-body">
+
+        <!-- ── Kolom kiri: Info produk ── -->
+        <div class="form-col">
+          <div class="form-group">
+            <label>Nama Produk *</label>
+            <input type="text" id="fp-nama" placeholder="contoh: Indomie Goreng">
+          </div>
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>Kategori *</label>
+              <input type="text" id="fp-kategori" placeholder="Mie Instan" list="kat-list">
+              <datalist id="kat-list">
+                <option>Mie Instan</option><option>Sembako</option>
+                <option>Minuman</option><option>Snack</option>
+                <option>Kebersihan</option><option>Rokok</option>
+              </datalist>
+            </div>
+            <div class="form-group">
+              <label>Emoji</label>
+              <input type="text" id="fp-emoji" placeholder="🍜" maxlength="2" style="text-align:center;font-size:1.4rem">
+            </div>
+          </div>
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>Harga Beli (Rp) *</label>
+              <input type="number" id="fp-harga-beli" placeholder="2200" min="0">
+            </div>
+            <div class="form-group">
+              <label>Harga Jual (Rp) *</label>
+              <input type="number" id="fp-harga-jual" placeholder="3500" min="0">
+            </div>
+          </div>
+          <!-- Preview margin real-time -->
+          <p id="margin-preview" class="margin-preview-text"></p>
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>Stok Saat Ini</label>
+              <input type="number" id="fp-stok" placeholder="0" min="0">
+            </div>
+            <div class="form-group">
+              <label>Minimum Stok (Alert)</label>
+              <input type="number" id="fp-min-stok" value="5" min="0">
             </div>
           </div>
         </div>
 
-        <div class="keu-card dash-card">
-          <div class="keu-icon">🧾</div>
-          <div>
-            <p class="keu-label">Total Transaksi</p>
-            <p class="keu-val" id="val-transaksi">0</p>
-            <p class="keu-sub">Transaksi bulan ini</p>
+        <!-- ── Kolom kanan: Upload gambar ── -->
+        <div class="form-col">
+          <label class="form-label-block">Gambar Produk</label>
+
+          <!-- Preview gambar -->
+          <div class="gambar-preview-wrap">
+            <img id="gambar-preview" src="" alt="Preview" style="display:none">
+            <div class="gambar-placeholder" id="gambar-placeholder">
+              <span>🖼</span>
+              <p>Belum ada gambar</p>
+            </div>
           </div>
-        </div>
 
-        <div class="keu-card keu-warn dash-card">
-          <div class="keu-icon">📋</div>
-          <div>
-            <p class="keu-label">Kasbon Aktif</p>
-            <p class="keu-val" id="val-kasbon">Rp 0</p>
-            <p class="keu-sub">Hutang belum lunas</p>
+          <!-- Upload file -->
+          <div class="upload-actions">
+            <label class="btn-upload-file">
+              📁 Upload File
+              <input type="file" id="fp-gambar-file" accept="image/*" style="display:none">
+            </label>
+            <button class="btn-capture-cam" id="btn-buka-kamera">📷 Kamera</button>
+            <button class="btn-hapus-img" id="btn-hapus-gambar">🗑</button>
           </div>
+
+          <!-- Video kamera (tersembunyi sampai dibuka) -->
+          <div class="kamera-wrap" id="kamera-wrap">
+            <video id="kamera-video" autoplay playsinline style="display:none;width:100%;border-radius:8px;margin-top:0.75rem"></video>
+            <canvas id="kamera-canvas" style="display:none;width:100%;border-radius:8px;margin-top:0.75rem"></canvas>
+            <button class="btn-ambil-foto" id="btn-ambil-foto" style="display:none">📸 Ambil Foto</button>
+          </div>
+
+          <!-- Catatan -->
+          <p class="text-muted" style="font-size:0.75rem;margin-top:0.75rem">
+            💡 Gambar dikonversi ke Base64 dan disimpan lokal.<br>
+            Ukuran otomatis dikompres ke maks 400px.
+          </p>
         </div>
 
       </div>
-    </section>
 
-    <!-- ── SECTION: Grafik Omzet + Stok Alert (2-col) ── -->
-    <section class="dash-section dash-two-col">
-
-      <!-- Grafik mini -->
-      <div class="dash-panel dash-card">
-        <div class="panel-header">
-          <span class="panel-title">📊 Omzet 7 Hari Terakhir</span>
-          <span class="panel-badge">Minggu ini</span>
-        </div>
-        <div id="grafik-container" class="grafik-wrap"></div>
+      <div class="modal-footer">
+        <button class="btn-bayar-kasbon" onclick="tutupFormProduk()">Batal</button>
+        <button class="btn-bayar-tunai" onclick="simpanProduk()">💾 Simpan Produk</button>
       </div>
 
-      <!-- Peringatan stok -->
-      <div class="dash-panel dash-card">
-        <div class="panel-header">
-          <span class="panel-title">⚠ Peringatan Stok</span>
-          <span class="panel-badge badge-red" id="stok-badge">0</span>
-        </div>
-        <div id="stok-alert-list" class="stok-list"></div>
-      </div>
-
-    </section>
-
-    <!-- ── SECTION: Kasbon + Credit Score ── -->
-    <section class="dash-section">
-      <div class="section-label">📋 Daftar Kasbon Aktif <span class="section-sub-note">· Fitur WhatsApp Debt Reminder</span></div>
-      <div id="kasbon-list" class="kasbon-list"></div>
-    </section>
-
-  </main><!-- /dash-main -->
-
-  <!-- Toast container auto-created by JS -->
+    </div>
+  </div>
 
 <script src="script.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     initDashboard();
+    initFormProduk();
+
+    // Tampilkan kamera video dan tombol ambil foto saat kamera dibuka
+    const btnKamera = document.getElementById('btn-buka-kamera');
+    const videoEl   = document.getElementById('kamera-video');
+    const btnFoto   = document.getElementById('btn-ambil-foto');
+
+    if (btnKamera && videoEl && btnFoto) {
+        const origClick = btnKamera.onclick;
+        btnKamera.addEventListener('click', () => {
+            btnFoto.style.display = 'block';
+        });
+    }
+
     // Tanggal hari ini
     const opts = { weekday:'long', year:'numeric', month:'long', day:'numeric' };
     document.getElementById('dash-tanggal').textContent = new Date().toLocaleDateString('id-ID', opts);

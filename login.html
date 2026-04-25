@@ -12,14 +12,13 @@
 </head>
 <body class="page-login">
 
-  <!-- ══ ANIMATED BACKGROUND ORBS (pure CSS) ══ -->
   <div class="bg-orb orb-1"></div>
   <div class="bg-orb orb-2"></div>
   <div class="bg-orb orb-3"></div>
 
   <div class="login-wrap">
 
-    <!-- ══ BRAND PANEL ══ -->
+    <!-- Brand Panel -->
     <div class="login-brand">
       <div class="brand-logo">🏪</div>
       <h1 class="brand-name">Waroeng<br><span>Digital</span></h1>
@@ -29,10 +28,12 @@
         <span class="pill">💰 Kasir Digital</span>
         <span class="pill">📱 Tagih via WA</span>
         <span class="pill">📊 Credit Score</span>
+        <span class="pill">💹 Tracking Laba</span>
+        <span class="pill">📷 Foto Produk</span>
       </div>
     </div>
 
-    <!-- ══ LOGIN CARD ══ -->
+    <!-- Login Card -->
     <div class="login-card">
       <div class="login-card-inner">
 
@@ -42,15 +43,13 @@
         </div>
 
         <form id="login-form" autocomplete="off">
-
           <div class="form-group">
             <label for="input-user">Username</label>
             <div class="input-wrap">
               <span class="input-icon">👤</span>
-              <input type="text" id="input-user" placeholder="owner atau kasir" required spellcheck="false">
+              <input type="text" id="input-user" placeholder="owner / kasir / customer" required spellcheck="false">
             </div>
           </div>
-
           <div class="form-group">
             <label for="input-pass">Password</label>
             <div class="input-wrap">
@@ -59,30 +58,27 @@
               <button type="button" id="toggle-pass" class="toggle-pass" tabindex="-1">👁</button>
             </div>
           </div>
-
-          <!-- Pesan error login -->
-          <div class="login-error" id="login-error">
-            ❌ Username atau password salah. Coba lagi.
-          </div>
-
+          <div class="login-error" id="login-error">❌ Username atau password salah. Coba lagi.</div>
           <button type="submit" id="btn-login" class="btn-login">
             <span class="btn-text">Masuk ke Dashboard</span>
             <span class="btn-loader"></span>
           </button>
-
         </form>
 
-        <!-- Demo shortcuts -->
         <div class="demo-section">
           <p class="demo-label">Demo cepat — klik untuk mengisi:</p>
           <div class="demo-btns">
             <button id="demo-owner" class="demo-btn demo-owner">
-              👑 Login sebagai Owner
-              <small>Akses dashboard & laporan</small>
+              👑 Owner
+              <small>Dashboard & Inventaris</small>
             </button>
             <button id="demo-kasir" class="demo-btn demo-kasir">
-              🛍 Login sebagai Kasir
-              <small>Akses tampilan POS</small>
+              🛍 Kasir
+              <small>Tampilan POS</small>
+            </button>
+            <button id="demo-customer" class="demo-btn demo-customer">
+              🧑 Pelanggan
+              <small>Katalog & Kasbon</small>
             </button>
           </div>
         </div>
@@ -90,7 +86,7 @@
       </div>
     </div>
 
-  </div><!-- /login-wrap -->
+  </div>
 
 <script src="script.js"></script>
 <script>document.addEventListener('DOMContentLoaded', initLogin);</script>
